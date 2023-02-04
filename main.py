@@ -28,5 +28,5 @@ draw.text(((left + 30), bottom-h), "rizexor.com/blog",
           font=blog_font, fill=(255, 255, 255))
 
 img = img.crop((left, top, right, bottom))
-img.show()
-# img.save("final_image.jpg")
+# img.show()
+img.save("final_image.jpg")

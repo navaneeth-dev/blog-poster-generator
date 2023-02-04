@@ -1,2 +1,4 @@
 *.jpg
 *.png
+
+!final_image.jpg
