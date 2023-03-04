@@ -1,6 +1,6 @@
 from PIL import Image, ImageOps, ImageDraw, ImageFont
 
-text = "SvelteKit From\nA NextJS Perspective"
+text = "SRM Vadapalani CTF"
 
 # Load the generated image
 img = Image.open("street.jpg")
@@ -18,13 +18,36 @@ bottom = (height + new_height)/2
 
 # Add text caption to the image
 draw = ImageDraw.Draw(img)
-font = ImageFont.truetype("Poppins-Bold.ttf", 32)
+font = ImageFont.truetype("Poppins-Bold.ttf", 36)
 blog_font = ImageFont.truetype("Poppins-Regular.ttf", 24)
 _, _, w, h = draw.textbbox((0, 0), text, font=font)
-draw.text(((left + 30), (height-h) / 2), text, font=font, fill=(255, 255, 255))
+shadowcolor = (0, 0, 0)
+draw.text((((width-w)/2)-1, ((height-h) / 2) - 1),
+          text, font=font, fill=shadowcolor)
+draw.text((((width-w)/2)+1, ((height-h) / 2) - 1),
+          text, font=font, fill=shadowcolor)
+draw.text((((width-w)/2)-1, ((height-h) / 2) + 1),
+          text, font=font, fill=shadowcolor)
+draw.text((((width-w)/2)+1, ((height-h) / 2) + 1),
+          text, font=font, fill=shadowcolor)
 
-_, _, w, h = draw.textbbox((0, 0), text, font=font)
-draw.text(((left + 30), bottom-h), "rizexor.com/blog",
+draw.text(((width-w)/2, (height-h) / 2), text, font=font, fill=(255, 255, 255))
+
+blog_text = "rizexor.com/blog"
+
+_, _, w, h = draw.textbbox((0, 0), blog_text, font=blog_font)
+
+draw.text((((width-w) / 2) - 1, ((bottom-h) - 20) - 1),
+          blog_text, font=blog_font, fill=shadowcolor)
+draw.text((((width-w) / 2) + 1, ((bottom-h) - 20) - 1),
+          blog_text, font=blog_font, fill=(0, 0, 0))
+draw.text((((width-w) / 2) - 1, ((bottom-h) - 20) + 1),
+          blog_text, font=blog_font, fill=(0, 0, 0))
+draw.text((((width-w) / 2) + 1, ((bottom-h) - 20) + 1),
+          blog_text, font=blog_font, fill=(0, 0, 0))
+
+# final text
+draw.text(((width-w) / 2, (bottom-h) - 20), blog_text,
           font=blog_font, fill=(255, 255, 255))
 
 img = img.crop((left, top, right, bottom))
